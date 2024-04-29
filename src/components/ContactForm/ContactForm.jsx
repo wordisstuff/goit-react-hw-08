@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from "formik";
-import validationSchema from "../helpers/validationSchema";
+import { contactsValidationSchema } from "../helpers/validationSchema";
 import { ErrorMessage } from "formik";
 
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
+import { addContact } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const ContactForm = () => {
       <Formik
         initialValues={{ name: "", number: "" }}
         onSubmit={handleAddContact}
-        validationSchema={validationSchema}
+        validationSchema={contactsValidationSchema}
       >
         <Form>
           <label>

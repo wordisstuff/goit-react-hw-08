@@ -2,10 +2,14 @@ import "./App.css";
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
-import { useEffect } from "react";
-import { fetchContacts } from "./redux/contactsOps";
+import { Suspense, useEffect, lazy } from "react";
+import { fetchContacts } from "./redux/contacts/operations";
 import { useDispatch } from "react-redux";
+import Layout from "./components/Layout/Layout";
+import Loader from "./components/Loader/Loader";
 
+const HomePage = lazy(() => import("./components/HomePage/HomePage"));
+const NotFound = lazy(() => import("./components/NotFound/NotFound"));
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -14,6 +18,14 @@ function App() {
 
   return (
     <>
+      <Layout>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </Layout>
       <h1>
         <span style={{ color: "#9c9ef9aa" }}>P</span>h
         <span style={{ color: "#9cf9c0aa" }}>o</span>n
