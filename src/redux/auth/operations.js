@@ -25,9 +25,9 @@ export const login = createAsyncThunk(
   "auth/login",
   async (formData, { rejectWithValue }) => {
     try {
-      const { data } = await contactsApi.post("/users/login", formData);
+        const { data } = await contactsApi.post("/users/login", formData);
+        console.log("login data: ", data);
       setToken(data.token);
-
       return data;
     } catch (e) {
       return rejectWithValue(e.message);

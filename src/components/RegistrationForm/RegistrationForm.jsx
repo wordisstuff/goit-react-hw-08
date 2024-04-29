@@ -1,46 +1,53 @@
+import { FiSearch } from "react-icons/fi";
+import style from "./RegistrationForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
-import { authValidationSchema } from "../helpers/validationSchema";
+import { register } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, password } = e.target;
+    const formData = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+    };
+    console.log(formData);
+    dispatch(register(formData));
 
-  const handleAddContact = (values, actions) => {
-    console.log(values);
-    dispatch(addContact(values));
-    actions.resetForm();
+    e.target.reset();
   };
-
   return (
-    <>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={handleAddContact}
-        validationSchema={authValidationSchema}
-      >
-        <Form>
-          <label>
-            <ErrorMessage className={css.error} name="email" component="span" />
-            <Field name="email" type="email" placeholder="Enter email"></Field>
-          </label>
-          <br />
-          <label>
-            <Field
-              name="password"
-              type="password"
-              placeholder="Enter password"
-            ></Field>
-            <ErrorMessage
-              className={css.error}
-              name="passworde"
-              component="span"
-            />
-          </label>
-          <br />
-          <button type="submit">📥</button>
-        </Form>
-      </Formik>
-    </>
+    <div>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <input
+          type="name"
+          className={style.input}
+          placeholder="Enter your name?"
+          name="name"
+          required
+          autoFocus
+        />
+        <input
+          type="email"
+          className={style.input}
+          placeholder="Enter your email?"
+          name="email"
+          required
+        />
+        <input
+          type="password"
+          className={style.input}
+          placeholder="Enter your password?"
+          name="password"
+          required
+        />
+        <button className={style.button} type="submit">
+          <FiSearch size="16px" />
+        </button>
+      </form>
+    </div>
   );
 };
 

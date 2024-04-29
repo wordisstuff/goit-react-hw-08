@@ -8,6 +8,6 @@ number: Yup.string().matches(/^[0-9]{10}$/,'Номер має містити 10 
 
 export const authValidationSchema = Yup.object().shape({
 email: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("*"),
-password: Yup.string().matches(/^[0-9]{<=7}$/,'parol має містити bilshe 7 цифр').required('*'),
+password: Yup.string().matches(/^[0-9]{7}$/,'parol має містити bilshe 7 цифр').required('*'),
 });
 

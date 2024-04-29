@@ -1,3 +1,4 @@
+import { createSlice } from "@reduxjs/toolkit";
 import { login, logout, refreshUser, register } from "./operations"
 
 export const INIT_STATE = 
@@ -19,23 +20,23 @@ export const authSlice = createSlice({
     extraReducers: (builder) => {
         builder 
             .addCase(register.fulfilled, (state, action) => {
-                state.user = action.payload;
+                state.user = action.payload.user;
                 state.token = action.payload.token;
             })
             .addCase(login.fulfilled, (state, action) => {
-        state.userData = action.payload.user;
-        state.token = action.payload.token;
-        })
-        .addCase(refreshUser.fulfilled, (state, action) => {
-        state.userData = action.payload;
-        })
-        .addCase(logout.fulfilled, () => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            })
+            .addCase(refreshUser.fulfilled, (state, action) => {
+            state.user = action.payload;
+            })
+            .addCase(logout.fulfilled, () => {
         return INIT_STATE;
         })
 
         .addMatcher((action)=> action.type.endsWith('pending'),handlePending)
-    .addMatcher((action)=> action.type.endsWith('fulfilled'),handleFulfilled)
-    .addMatcher((action)=> action.type.endsWith('rejected'),handleRejected)
+        .addMatcher((action)=> action.type.endsWith('fulfilled'),handleFulfilled)
+        .addMatcher((action)=> action.type.endsWith('rejected'),handleRejected)
     }
 })
 
@@ -49,7 +50,9 @@ const handleFulfilled = state => {
 }
 
 const handleRejected = (state, action) => {
+    state.isLoggedIn = false;
     state.isLoading = false;
     state.isError = action.payload;
-    state.isLoggedIn = false;
 }
+
+export const authReducer = authSlice.reducer;

@@ -1,19 +1,27 @@
 import "./App.css";
-import ContactList from "./components/ContactList/ContactList";
-import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
+// import ContactList from "./components/ContactList/ContactList";
+// import ContactForm from "./components/ContactForm/ContactForm";
+// import SearchBox from "./components/SearchBox/SearchBox";
 import { Suspense, useEffect, lazy } from "react";
 import { fetchContacts } from "./redux/contacts/operations";
 import { useDispatch } from "react-redux";
 import Layout from "./components/Layout/Layout";
 import Loader from "./components/Loader/Loader";
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./pages/PrivateRoute";
+import RestrictedRoute from "./pages/RestrictedRoute";
+import { refreshUser } from "./redux/auth/operations";
 
-const HomePage = lazy(() => import("./components/HomePage/HomePage"));
-const NotFound = lazy(() => import("./components/NotFound/NotFound"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const ContactsPage = lazy(() => import("./pages/ContactsPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
+    // dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
@@ -22,19 +30,34 @@ function App() {
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route
+              path="/register"
+              element={
+                <RestrictedRoute>
+                  <RegistrationPage />
+                </RestrictedRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <RestrictedRoute>
+                  <LoginPage />
+                </RestrictedRoute>
+              }
+            />
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute>
+                  <ContactsPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Layout>
-      <h1>
-        <span style={{ color: "#9c9ef9aa" }}>P</span>h
-        <span style={{ color: "#9cf9c0aa" }}>o</span>n
-        <span style={{ color: "#61dafbaa" }}>e</span>b
-        <span style={{ color: "#80945baa" }}>♾️</span>k
-      </h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
     </>
   );
 }
