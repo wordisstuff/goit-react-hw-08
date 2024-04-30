@@ -12,7 +12,6 @@ export const register = createAsyncThunk(
     "auth/register",
     async (formData, { rejectWithValue }) => {try {
       const { data } = await contactsApi.post("/users/signup", formData);
-        console.log("REGISTER data: ", data);
         setToken(data.token);
       return data;
     } catch (e) {
@@ -26,7 +25,6 @@ export const login = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
         const { data } = await contactsApi.post("/users/login", formData);
-        console.log("login data: ", data);
       setToken(data.token);
       return data;
     } catch (e) {
@@ -43,8 +41,6 @@ export const refreshUser = createAsyncThunk(
       const token = state.auth.token;
       setToken(token);
       const { data } = await contactsApi.get("/users/current");
-      console.log("REFRESH data: ", data);
-
       return data;
     } catch (e) {
       return rejectWithValue(e.message);

@@ -19,11 +19,7 @@ const contactsSlice = createSlice({
         state.items = action.payload;
     })
       .addCase(addContact.fulfilled, (state, action) => {
-        console.log(action)
-        if (Array.isArray(state.items)) {
-      return state.items.push(action.payload.data);
-      }
-      return state.items = action.payload.data
+        state.items = [...state.items,action.payload]
     })
 
       .addCase(deleteContact.fulfilled, (state, action) => {
