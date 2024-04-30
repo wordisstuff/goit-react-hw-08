@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { selectUser } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
-
+import CSS from "./AuthNav.module.css";
 const AuthNav = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
