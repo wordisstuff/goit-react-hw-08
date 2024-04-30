@@ -15,51 +15,40 @@ const contactsSlice = createSlice({
   // Об'єкт редюсерів
   extraReducers: (builder) => {
     builder
-      .addCase(fetchContacts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.loading = false;
         state.items = action.payload;
-      })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-
-    .addCase(addContact.pending, (state) => {
-      state.loading = true;
-      state.error = null;
     })
-    .addCase(addContact.fulfilled, (state, action) => {
-      state.loading = false;
-      console.log(action)
-      if (Array.isArray(state.items)) {
-       return state.items.push(action.payload.data);
+      .addCase(addContact.fulfilled, (state, action) => {
+        console.log(action)
+        if (Array.isArray(state.items)) {
+      return state.items.push(action.payload.data);
       }
       return state.items = action.payload.data
     })
-    .addCase(addContact.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    })
-    .addCase(deleteContact.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    })
-    .addCase(deleteContact.fulfilled, (state, action) => {
-      state.loading = false;
+
+      .addCase(deleteContact.fulfilled, (state, action) => {
       const contactIdx = state.items.findIndex(contact => contact.id === action.payload.id);
       state.items.splice(contactIdx, 1);
     })
-    .addCase(deleteContact.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    })
-
+    
+      .addMatcher((action)=> action.type.endsWith('pending'),handlePending)
+      .addMatcher((action) => action.type.endsWith('rejected'), handleRejected)
+      .addMatcher((action) => action.type.endsWith('fulfilled'), handleFulfilled)
   },
 });
+
+const handlePending = state => {
+      state.loading = true;
+      state.error = null;
+}
+const handleFulfilled = state => {
+    state.loading = false;
+}
+
+const handleRejected = (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+}
 
 // Редюсер слайсу
 export const contactsReducer = contactsSlice.reducer;

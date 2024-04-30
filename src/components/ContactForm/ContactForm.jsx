@@ -17,6 +17,7 @@ const ContactForm = () => {
 
   return (
     <>
+      <h1 className={css.title}>contacts</h1>
       <Formik
         initialValues={{ name: "", number: "" }}
         onSubmit={handleAddContact}
@@ -24,6 +25,8 @@ const ContactForm = () => {
       >
         <Form>
           <label>
+            {" "}
+            add contact
             <ErrorMessage className={css.error} name="name" component="span" />
             <Field name="name" type="text" placeholder="Henry Morgan"></Field>
           </label>

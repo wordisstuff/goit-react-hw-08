@@ -5,6 +5,7 @@ import { register } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, password } = e.target;

@@ -41,7 +41,6 @@ export const refreshUser = createAsyncThunk(
     try {
       const state = getState();
       const token = state.auth.token;
-
       setToken(token);
       const { data } = await contactsApi.get("/users/current");
       console.log("REFRESH data: ", data);
