@@ -3,10 +3,14 @@ import { NavLink } from "react-router-dom";
 import { selectUser } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
 import CSS from "./AuthNav.module.css";
+import { logOutContact } from "../../redux/contacts/operations";
 const AuthNav = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const onLogout = () => dispatch(logout());
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(logOutContact());
+  };
   return (
     <div>
       <NavLink className={CSS.navlink} to="/contacts">

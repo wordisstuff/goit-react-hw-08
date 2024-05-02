@@ -1,5 +1,5 @@
 import {  createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import { fetchContacts, addContact, deleteContact, logOutContact } from "./operations";
 
 const INIT_STATE = {
   items: null,
@@ -25,6 +25,9 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
       const contactIdx = state.items.findIndex(contact => contact.id === action.payload.id);
       state.items.splice(contactIdx, 1);
+      })
+      .addCase(logOutContact.fulfilled, (state, action) => {
+        state.items = action.payload
     })
     
       .addMatcher((action)=> action.type.endsWith('pending'),handlePending)

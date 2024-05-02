@@ -37,4 +37,13 @@ export const deleteContact = createAsyncThunk(
         }
     }
 )
-
+export const logOutContact = createAsyncThunk(
+    "contacts/logOutContact",() => null
+    // async (_, { rejectWithValue}) => {
+    //     try {
+    //         return null; 
+    //     } catch (error) {
+    //         return rejectWithValue(error.message);
+    //     }
+    // }
+)
