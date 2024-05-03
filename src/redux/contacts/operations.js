@@ -37,13 +37,15 @@ export const deleteContact = createAsyncThunk(
         }
     }
 )
-export const logOutContact = createAsyncThunk(
-    "contacts/logOutContact",() => null
-    // async (_, { rejectWithValue}) => {
-    //     try {
-    //         return null; 
-    //     } catch (error) {
-    //         return rejectWithValue(error.message);
-    //     }
-    // }
+
+export const updateContact = createAsyncThunk(
+    "contacts/updateContact",
+    async ({id, ...contact}, { rejectWithValue }) => {
+        try {
+            const {data} = await contactsApi.patch(`/contacts/${id}`, contact)
+            return data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
 )

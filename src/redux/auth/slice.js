@@ -32,26 +32,7 @@ export const authSlice = createSlice({
             })
             .addCase(logout.fulfilled, () => {
         return INIT_STATE;
-        })
-
-        .addMatcher((action)=> action.type.endsWith('pending'),handlePending)
-        .addMatcher((action)=> action.type.endsWith('fulfilled'),handleFulfilled)
-        .addMatcher((action)=> action.type.endsWith('rejected'),handleRejected)
-    }
+        })}
 })
-
-const handlePending = state => {
-    state.isLoading = true;
-    state.isError = false;
-}
-const handleFulfilled = state => {
-    state.isLoading = false;
-}
-
-const handleRejected = (state, action) => {
-    state.isLoggedIn = false;
-    state.isLoading = false;
-    state.isError = action.payload;
-}
 
 export const authReducer = authSlice.reducer;

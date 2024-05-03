@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
-import { selectLoading } from "../../redux/contacts/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectLoading } from "../../redux/global/selectors";
+import { setSelectedContact } from "../../redux/contacts/slice";
 
 const Contact = ({ data, delContactFunc }) => {
   const { name, number, id } = data;
+
+  const dispatch = useDispatch();
 
   const lodading = useSelector(selectLoading);
   return (
@@ -17,6 +20,9 @@ const Contact = ({ data, delContactFunc }) => {
         }}
       >
         🪣
+      </button>
+      <button onClick={() => dispatch(setSelectedContact(data))} type="button">
+        🔧
       </button>
     </>
   );
