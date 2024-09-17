@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useState } from "react";
 import Modal from "react-modal";
 import { contactsValidationSchema } from "../helpers/validationSchema";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,7 +37,7 @@ const EditContactForm = () => {
   };
 
   const handleEditContact = async (values, actions) => {
-    await dispatch(updateContact({ id: selectedContact.id, ...values }));
+    await dispatch(updateContact({ id: selectedContact._id, ...values }));
     actions.resetForm();
   };
 

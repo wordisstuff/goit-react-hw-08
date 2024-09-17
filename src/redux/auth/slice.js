@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, refreshUser, register } from "./operations"
+import { login, logout, refreshUser, register, updateAvatar } from "./operations"
 
 export const INIT_STATE = 
 {
@@ -29,6 +29,9 @@ export const authSlice = createSlice({
             .addCase(refreshUser.fulfilled, (state, action) => {
                 state.isLoggedIn = true;
                 state.user = action.payload;
+            })
+            .addCase(updateAvatar.fulfilled, (state, action) => {
+                state.user.avatar = action.payload.avatar; 
             })
             .addCase(logout.fulfilled, () => {
         return INIT_STATE;

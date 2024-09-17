@@ -18,6 +18,8 @@ const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const ProfilePage = lazy(() => import("./pages/Profile"));
+const UpdateUserPage = lazy(() => import("./pages/UpdateUser"));
 function App() {
   // const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
@@ -33,7 +35,7 @@ function App() {
             <Route
               path="/register"
               element={
-                <RestrictedRoute>
+                <RestrictedRoute restricted>
                   <RegistrationPage />
                 </RestrictedRoute>
               }
@@ -41,7 +43,7 @@ function App() {
             <Route
               path="/login"
               element={
-                <RestrictedRoute>
+                <RestrictedRoute restricted>
                   <LoginPage />
                 </RestrictedRoute>
               }
@@ -51,6 +53,22 @@ function App() {
               element={
                 <PrivateRoute>
                   <ContactsPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <ProfilePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile/update"
+              element={
+                <PrivateRoute>
+                  <UpdateUserPage />
                 </PrivateRoute>
               }
             />

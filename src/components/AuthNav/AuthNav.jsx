@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { selectUser } from "../../redux/auth/selectors";
 import { logout } from "../../redux/auth/operations";
 import CSS from "./AuthNav.module.css";
@@ -21,6 +21,7 @@ const AuthNav = () => {
       </NavLink>
       <div>
         <span>Hello {user.name}</span>
+        <Link to="/profile">Profile</Link>
         <button onClick={onLogout} type="button">
           Logout
         </button>

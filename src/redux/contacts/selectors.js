@@ -16,6 +16,6 @@ export const selectFilteredContacts = createSelector(
     return items.filter(user =>
     user.name.toLowerCase().includes(name.toLowerCase())
   )
-   }
+  }
 
 )

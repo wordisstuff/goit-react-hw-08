@@ -1,13 +1,8 @@
 import axios from "axios";
 
-
 export const contactsApi = axios.create({
-  baseURL: "https://connections-api.herokuapp.com"
-})
-
-
-
-
+  baseURL: "http://localhost:8080",
+});
 
 // axios.defaults.baseURL = "https://662c1014de35f91de15a5d5b.mockapi.io";
 // export const getContacts = async () => {
