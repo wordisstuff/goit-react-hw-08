@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const contactsApi = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://localhost:8081",
 });
 
 // axios.defaults.baseURL = "https://662c1014de35f91de15a5d5b.mockapi.io";
