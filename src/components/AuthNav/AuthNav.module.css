@@ -1,0 +1,28 @@
+.navSection{
+    display: flex;
+    justify-content: space-between;
+}
+.navBox {
+    display: flex;
+    flex-direction: column;
+    align-items: last baseline;
+    gap: 18px;
+}
+.logBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.btn{
+    margin: 0;
+    padding: 2px 5px;
+    font-size: small;
+}
+.link{
+    color: aliceblue;
+}
+.active{
+    text-decoration: underline;
+    color: aqua;
+}

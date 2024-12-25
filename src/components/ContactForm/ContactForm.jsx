@@ -33,27 +33,31 @@ const ContactForm = () => {
     <>
       <h1 className={css.title}>contacts</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            type="text"
-            name="name"
-          />
-        </label>
-        <label>
-          Number:
-          <input
-            onChange={(e) => {
-              setNumber(e.target.value);
-            }}
-            type="text"
-            name="number"
-          />
-        </label>
+        <div className={css.inputBox}>
+          <p className={css.titleForm}>create new</p>
+          <label>
+            Name:
+            <input
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              type="text"
+              name="name"
+            />
+          </label>
+          <label>
+            Number:
+            <input
+              onChange={(e) => {
+                setNumber(e.target.value);
+              }}
+              type="text"
+              name="number"
+            />
+          </label>
+        </div>
         <Select
+          className={css.select}
           onChange={(option) => {
             setContactType(option.value);
           }}
@@ -62,32 +66,6 @@ const ContactForm = () => {
         />
         <button>Save</button>
       </form>
-
-      {/* <Formik
-        initialValues={{ name: "", number: "" }}
-        onSubmit={handleAddContact}
-        validationSchema={contactsValidationSchema}
-      >
-        <Form>
-          <label>
-            {" "}
-            add contact
-            <ErrorMessage className={css.error} name="name" component="span" />
-            <Field name="name" type="text" placeholder="Henry Morgan"></Field>
-          </label>
-          <br />
-          <label>
-            <Field name="number" type="tel" placeholder="0957777777"></Field>
-            <ErrorMessage
-              className={css.error}
-              name="number"
-              component="span"
-            />
-          </label>
-          <br />
-          <button type="submit">📥</button>
-        </Form>
-      </Formik> */}
     </>
   );
 };

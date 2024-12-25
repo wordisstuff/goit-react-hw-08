@@ -1,0 +1,14 @@
+.prof{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+}
+
+.name{
+    margin: 0;
+}
+.avatar{
+    padding-top: 22px;
+}

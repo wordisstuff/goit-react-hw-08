@@ -4,6 +4,7 @@ import { selectFilteredContacts } from "../../redux/contacts/selectors";
 import { deleteContact, fetchContacts } from "../../redux/contacts/operations";
 import { useEffect, useState } from "react";
 import Select from "react-select";
+import css from "./ContactList.module.css";
 
 const ContactList = () => {
   const [selectedType, setSelectedType] = useState("all");
@@ -28,6 +29,7 @@ const ContactList = () => {
   return (
     <>
       <Select
+        className={css.select}
         onChange={(option) => {
           setSelectedType(option.value);
         }}

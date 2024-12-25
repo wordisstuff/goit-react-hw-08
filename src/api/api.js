@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URLA = () =>
+export const URLA = () =>
   window.location.hostname === "localhost"
     ? "http://localhost:8082"
     : "https://honebook-server.onrender.com";

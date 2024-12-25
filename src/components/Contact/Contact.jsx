@@ -26,6 +26,7 @@ const Contact = ({ data, delContactFunc }) => {
         <p>☎️ {number}</p>
         <p>Type: {contactType} </p>
         <button
+          style={{ marginRight: 8 }}
           disabled={loading}
           type="button"
           onClick={() => {
